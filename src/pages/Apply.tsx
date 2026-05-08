@@ -19,6 +19,8 @@ const defaultData: ApplicationData = {
   message: "",
 }
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"
+
 const Apply: React.FC = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState<ApplicationData>(defaultData)
@@ -51,7 +53,7 @@ const Apply: React.FC = () => {
     setLoading(true)
 
     try {
-      const response = await fetch("/api/apply", {
+      const response = await fetch(`${backendUrl}/api/apply`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
